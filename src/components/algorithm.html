@@ -1,6 +1,6 @@
 <b-container fluid>
     <b-card>
-        <img :src="imageSource" />
+        <img :src="require('../assets/algorithms/' + algName + '.png')" />
         <p>{{ algName }}</p>
         <a :href="stepsLink">{{ steps }}</a>
     </b-card>

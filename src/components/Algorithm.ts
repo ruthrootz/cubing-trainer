@@ -9,7 +9,8 @@ export default class Algorithm extends Vue {
     @Prop()
     private steps: string;
     private stepsLink: string = '';
-    private imageSource: string = name + '.png';
+    private imageSource: string = '';
+
     private created(): void {
         this.stepsLink = 'https://alg.cubing.net/?view=playback&type=alg&title=OLL%20Case%2027%20Sune&setup=._x2_.&alg='
         + this.steps.replace('\'', '-');
