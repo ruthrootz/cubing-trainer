@@ -1,7 +1,7 @@
-<b-container fluid>
-    <b-card>
+<b-container>
+    <b-card class="algorithm-component">
         <img :src="require('../assets/algorithms/' + algName + '.png')" />
-        <p>{{ algName }}</p>
+        <p>{{ algName.toUpperCase() }}</p>
         <a :href="stepsLink">{{ steps }}</a>
     </b-card>
 </b-container>

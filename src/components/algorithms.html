@@ -5,11 +5,21 @@
 
           </b-tab>
           <b-tab title="Intermediate">
-            <algorithm :algName="'sune'"
-                       :steps="'.(RUR\'U).(RU2R\').'"/>
+            <div>
+              <h1>1st look</h1>
+              <algorithm-component v-for="alg in intermediateAlgorithmsFirst"
+                         :algName="alg.name"
+                         :steps="alg.steps" />
+            </div>
+            <div>
+              <h1>2nd look</h1>
+              <algorithm-component v-for="alg in intermediateAlgorithmsSecond"
+                         :algName="alg.name"
+                         :steps="alg.steps" />
+            </div>
           </b-tab>
           <b-tab title="Pro">
-            
+
           </b-tab>
         </b-tabs>
     </div>

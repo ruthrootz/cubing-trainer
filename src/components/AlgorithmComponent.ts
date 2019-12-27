@@ -1,9 +1,10 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import WithRender from './algorithm.html';
+import WithRender from './algorithm-component.html';
+require('../styles/algorithm-component.css');
 
 @WithRender
 @Component
-export default class Algorithm extends Vue {
+export default class AlgorithmComponent extends Vue {
     @Prop()
     private algName: string;
     @Prop()
