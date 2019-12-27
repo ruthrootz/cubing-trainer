@@ -5,6 +5,7 @@ require('../styles/algorithm-component.css');
 @WithRender
 @Component
 export default class AlgorithmComponent extends Vue {
+
     @Prop()
     private algName: string;
     @Prop()
@@ -16,4 +17,5 @@ export default class AlgorithmComponent extends Vue {
         this.stepsLink = 'https://alg.cubing.net/?view=playback&type=alg&title=OLL%20Case%2027%20Sune&setup=._x2_.&alg='
         + this.steps.replace('\'', '-');
     }
+
 }
