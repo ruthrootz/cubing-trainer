@@ -37,7 +37,7 @@ export default class Algorithms extends Vue {
         {
             algId: 5,
             name: 'anti-sune',
-            steps: '.(L\'U\'LU\').(L\'U2 L).',
+            steps: '.(L\'U\'LU\').(L\'U2L).',
         },
         {
             algId: 6,
