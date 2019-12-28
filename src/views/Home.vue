@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <h1>Cubing Trainer</h1>
+  <div class="algorithms">
     <Algorithms/>
   </div>
 </template>
@@ -10,7 +9,7 @@
 import Algorithms from '@/components/Algorithms.ts';
 
 export default {
-  name: 'home',
+  name: 'algorithms',
   components: {
     Algorithms,
   },
