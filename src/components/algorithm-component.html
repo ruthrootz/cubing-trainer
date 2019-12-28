@@ -2,6 +2,6 @@
     <b-card class="algorithm-component">
         <img :src="require('../assets/algorithms/' + algName + '.png')" />
         <p>{{ algName.toUpperCase() }}</p>
-        <a :href="stepsLink">{{ steps }}</a>
+        <a :href="stepsLink">{{ steps.replace(/\./g, '') }}</a>
     </b-card>
 </b-container>
