@@ -1,5 +1,5 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import WithRender from './algorithms.html';
+import WithRender from './algorithms-component.html';
 import AlgorithmComponent from './AlgorithmComponent';
 
 @WithRender
@@ -8,7 +8,7 @@ import AlgorithmComponent from './AlgorithmComponent';
         AlgorithmComponent,
     },
 })
-export default class Algorithms extends Vue {
+export default class AlgorithmsComponent extends Vue {
 
     private intermediateAlgorithmsFirst: object[] = [
         {
