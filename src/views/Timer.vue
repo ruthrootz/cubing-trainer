@@ -1,5 +1,17 @@
 <template>
   <div class="timer">
-    <h1>This is the timer page.</h1>
+    <TimerComponent/>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import TimerComponent from '@/components/TimerComponent.ts';
+
+export default {
+  name: 'timer-component',
+  components: {
+    TimerComponent,
+  },
+};
+</script>
