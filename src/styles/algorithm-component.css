@@ -1,5 +1,13 @@
+* {
+    font-family: 'Space Mono', monospace;
+}
+
 .algorithm-component {
-    font-size: 1.75em;
+    font-size: 1.5em;
     font-weight: bold;
     margin: 1%;
+}
+
+.timer {
+    font-size: 4em;
 }
