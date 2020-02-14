@@ -9,13 +9,22 @@ export default class TimerComponent extends Vue {
     private time: number = 0;
 
     private mounted(): void {
-        window.addEventListener("keypress", e => {
-            console.log(String.fromCharCode(e.keyCode));
+        window.addEventListener('keyup', (e) => {
+            if (e.keyCode === 32) {
+                this.timerTrigger();
+            }
+            if (e.keyCode === 27) {
+                this.clearTimer();
+            }
         });
     }
 
     private timerTrigger(): void {
-        console.log('test');
+        this.time++;
+    }
+
+    private clearTimer(): void {
+        this.time = 0;
     }
 
 }
