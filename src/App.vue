@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
     <div id="nav">
       <router-link to="/">Algorithms</router-link> |
       <router-link to="/timer">Timer</router-link>

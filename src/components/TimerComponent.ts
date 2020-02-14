@@ -7,15 +7,41 @@ require('../styles/timer-component.css');
 export default class TimerComponent extends Vue {
 
     private time: number = 0;
+    private timerRunning = false;
 
     private mounted(): void {
-        window.addEventListener("keypress", e => {
-            console.log(String.fromCharCode(e.keyCode));
+        window.addEventListener('keyup', (e) => {
+            if (e.keyCode === 32) {
+                this.timerTrigger();
+            }
+            if (e.keyCode === 27) {
+                this.clearTimer();
+            }
         });
     }
 
     private timerTrigger(): void {
-        console.log('test');
+        if (this.timerRunning) {
+            this.timerRunning = false;
+        } else {
+            this.timerRunning = true;
+            this.time = 0;
+            this.tick();
+        }
+    }
+
+    private tick(): void {
+        setTimeout( () => {
+            if (this.timerRunning) {
+                this.tick(); 
+            }
+            this.time += 0.01;
+        }, 10 );
+    }
+
+    private clearTimer(): void {
+        this.timerRunning = false;
+        this.time = 0;
     }
 
 }
