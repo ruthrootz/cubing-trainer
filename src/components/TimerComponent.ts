@@ -8,11 +8,18 @@ export default class TimerComponent extends Vue {
 
     private time: number = 0;
     private timerRunning = false;
+    private solveNumber = 0;
+
+    private fields: string[] = [
+        'Solve Number',
+        'Time',
+        'DNF',
+    ];
     private times: object[] = [
         {
-            session: 'session1',
-            time: 45.0,
-            DNF: false,
+            "Solve Number": 0,
+            Time: 45.0,
+            DNF: true,
         },
     ];
 
