@@ -66,4 +66,40 @@ export default class AlgorithmsComponent extends Vue {
         },
     ];
 
+    private intermediateAlgorithmsThird: object[] = [
+        {
+            algId: 11,
+            name: 'headlights-back',
+            steps: '.x\'.(R\'DR\').U2\'.(RD\'R\').U2\'R2F\'x.',
+        },
+        {
+            algId: 12,
+            name: 'no-headlights',
+            steps: '.FRU\'R\'U\'RUR\'F\'.(RUR\'U\').(R\'FRF\').',
+        },
+    ];
+
+    private intermediateAlgorithmsFourth: object[] = [
+        {
+            algId: 13,
+            name: 'ua',
+            steps: '.M2\'UMU2M\'UM2\'.',
+        },
+        {
+            algId: 14,
+            name: 'ub',
+            steps: '.M2\'U\'MU2\'M\'U\'M2\'.',
+        },
+        {
+            algId: 15,
+            name: 'z',
+            steps: '.(M2\'U\'M2\'U\').M\'.(U2M2\'U2).M\'.',
+        },
+        {
+            algId: 16,
+            name: 'h-last',
+            steps: '.(M2\'UM2\').U2.(M2\'UM2\').',
+        },
+    ];
+
 }
