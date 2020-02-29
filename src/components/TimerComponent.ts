@@ -8,6 +8,20 @@ export default class TimerComponent extends Vue {
 
     private time: number = 0;
     private timerRunning = false;
+    private solveNumber = 0;
+
+    private fields: string[] = [
+        'Solve Number',
+        'Time',
+        'DNF',
+    ];
+    private times: object[] = [
+        {
+            "Solve Number": 0,
+            Time: 45.0,
+            DNF: true,
+        },
+    ];
 
     private mounted(): void {
         window.addEventListener('keyup', (e) => {
@@ -23,6 +37,7 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
+            // add time entry to table
         } else {
             this.timerRunning = true;
             this.time = 0;
