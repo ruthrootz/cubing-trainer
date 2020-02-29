@@ -11,7 +11,7 @@ export default class TimerComponent extends Vue {
 
     private mounted(): void {
         window.addEventListener('keyup', (e) => {
-            if (e.keyCode === 32) {
+            if (e.keyCode !== 27) {
                 this.timerTrigger();
             }
             if (e.keyCode === 27) {
