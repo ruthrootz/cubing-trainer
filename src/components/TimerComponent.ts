@@ -9,14 +9,14 @@ export default class TimerComponent extends Vue {
 
     private time: number = 0;
     private timerRunning = false;
-    private solveNumber = 0;
+    private solveNumber = 1;
 
     private fields: any[] = [
         { key: 'id', label: 'Solve Id' },
         { key: 'time', label: 'Time' },
         { key: 'dnf', label: 'DNF' },
     ];
-    private times: SolveLog[] = [
+    private solves: SolveLog[] = [
         {
             id: 0,
             sessionId: 0,
@@ -40,7 +40,7 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            // add time entry to table
+            this.solves.push(new SolveLog(this.solveNumber++, 0, null, this.time, false));
         } else {
             this.timerRunning = true;
             this.time = 0;
