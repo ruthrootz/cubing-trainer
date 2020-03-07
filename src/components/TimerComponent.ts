@@ -1,5 +1,6 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import WithRender from './timer-component.html';
+import { SolveLog } from '@/models/SolveLog';
 require('../styles/timer-component.css');
 
 @WithRender
@@ -10,16 +11,18 @@ export default class TimerComponent extends Vue {
     private timerRunning = false;
     private solveNumber = 0;
 
-    private fields: string[] = [
-        'Solve Number',
-        'Time',
-        'DNF',
+    private fields: any[] = [
+        { key: 'id', label: 'Solve Id' },
+        { key: 'time', label: 'Time' },
+        { key: 'dnf', label: 'DNF' },
     ];
-    private times: object[] = [
+    private times: SolveLog[] = [
         {
-            "Solve Number": 0,
-            Time: 45.0,
-            DNF: true,
+            id: 0,
+            sessionId: 0,
+            userId: null,
+            time: 45.0,
+            dnf: true,
         },
     ];
 
