@@ -1,5 +1,6 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import WithRender from './timer-component.html';
+import { SolveLog } from '@/models/SolveLog';
 require('../styles/timer-component.css');
 
 @WithRender
@@ -8,24 +9,26 @@ export default class TimerComponent extends Vue {
 
     private time: number = 0;
     private timerRunning = false;
-    private solveNumber = 0;
+    private solveNumber = 1;
 
-    private fields: string[] = [
-        'Solve Number',
-        'Time',
-        'DNF',
+    private fields: any[] = [
+        { key: 'id', label: 'Solve Id' },
+        { key: 'time', label: 'Time' },
+        { key: 'dnf', label: 'DNF' },
     ];
-    private times: object[] = [
+    private solves: SolveLog[] = [
         {
-            "Solve Number": 0,
-            Time: 45.0,
-            DNF: true,
+            id: 0,
+            sessionId: 0,
+            userId: null,
+            time: 45.0,
+            dnf: true,
         },
     ];
 
     private mounted(): void {
         window.addEventListener('keyup', (e) => {
-            if (e.keyCode !== 27) {
+            if (e.keyCode === 32) {
                 this.timerTrigger();
             }
             if (e.keyCode === 27) {
@@ -37,7 +40,8 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            // add time entry to table
+            this.solves.push(new SolveLog(this.solveNumber++, 0, null, Math.round(this.time * 1000) / 1000, false));
+            console.log(this.solves);
         } else {
             this.timerRunning = true;
             this.time = 0;
