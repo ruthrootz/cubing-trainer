@@ -28,7 +28,7 @@ export default class TimerComponent extends Vue {
 
     private mounted(): void {
         window.addEventListener('keyup', (e) => {
-            if (e.keyCode !== 27) {
+            if (e.keyCode === 32) {
                 this.timerTrigger();
             }
             if (e.keyCode === 27) {
@@ -40,7 +40,8 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            this.solves.push(new SolveLog(this.solveNumber++, 0, null, this.time, false));
+            this.solves.push(new SolveLog(this.solveNumber++, 0, null, Math.round(this.time * 1000) / 1000, false));
+            console.log(this.solves);
         } else {
             this.timerRunning = true;
             this.time = 0;

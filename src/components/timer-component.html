@@ -2,7 +2,7 @@
     <h1 class="timer">{{ time.toFixed(2) }}</h1>
     <div class="times">
         <b-table bordered dark responsive :fields="fields" :items="solves">
-            <template v-slot:cell(id)="data">
+            <!-- <template v-slot:cell(id)="data">
                 <b>{{ data.item.id }}</b>
             </template>
             <template v-slot:cell(time)="data">
@@ -16,7 +16,7 @@
                   v-for="field in scope.fields"
                   :key="field.key"
                   :style="{ width: '33%' }" />
-              </template>
+            </template> -->
         </b-table>
     </div>
 </div>
