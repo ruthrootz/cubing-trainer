@@ -42,7 +42,7 @@ export default class TimerComponent extends Vue {
     }
 
     private mounted(): void {
-        window.addEventListener('keyup', (e) => {
+        window.addEventListener('keyup', (e: KeyboardEvent): void => {
             if (e.keyCode === 32) {
                 this.timerTrigger();
             }
@@ -50,8 +50,8 @@ export default class TimerComponent extends Vue {
                 this.clearTimer();
             }
         });
-        window.onkeydown = function(e) { 
-            return !(e.keyCode == 32 && e.target == document.body);
+        window.onkeydown = (e: KeyboardEvent): boolean => {
+            return !(e.keyCode === 32 && e.target === document.body);
         };
         this.$notify({
             group: 'notifications',
@@ -80,7 +80,7 @@ export default class TimerComponent extends Vue {
     private tick(): void {
         setTimeout( () => {
             if (this.timerRunning) {
-                this.tick(); 
+                this.tick();
             }
             this.time += 0.01;
         }, 10 );
