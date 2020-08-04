@@ -1,9 +1,18 @@
 .scramble {
-    font-size: 0.25em;
+    font-size: 0.4em;
+    padding: 5%;
+}
+
+.average {
+    font-size: 0.4em;
+}
+
+.timer {
+    font-size: 3em;
 }
 
 .times {
-    font-size: 0.25em;
+    font-size: 0.4em;
     width: 75%;
     margin: 0 auto;
 }
