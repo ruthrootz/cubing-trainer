@@ -1,9 +1,14 @@
 .scramble {
     font-size: 0.25em;
+    padding: 5%;
 }
 
 .average {
     font-size: 0.25em;
+}
+
+.timer {
+    font-size: 3em;
 }
 
 .times {
