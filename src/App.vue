@@ -6,6 +6,7 @@
       <router-link to="/timer">Timer</router-link>
     </div>
     <router-view/>
+    <notifications group="notifications" />
   </div>
 </template>
 
