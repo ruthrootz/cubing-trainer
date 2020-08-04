@@ -2,8 +2,8 @@
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
     <div id="nav">
-      <router-link to="/">Algorithms</router-link> |
-      <router-link to="/timer">Timer</router-link>
+      <router-link to="/">Timer</router-link> |
+      <router-link to="/algorithms">Algorithms</router-link>
     </div>
     <router-view/>
     <notifications group="notifications" />
