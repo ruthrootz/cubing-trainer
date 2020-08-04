@@ -29,6 +29,18 @@ export default class TimerComponent extends Vue {
         },
     ];
 
+    private get sessionAverage(): number {
+        let sum: number = 0;
+        let total: number = 0;
+        this.solves.forEach((solve: SolveLog): void => {
+            if (!solve.dnf) {
+                sum = sum + solve.time;
+                total++;
+            }
+        });
+        return sum / total ? sum / total : 0;
+    }
+
     private mounted(): void {
         window.addEventListener('keyup', (e) => {
             if (e.keyCode === 32) {
@@ -76,8 +88,8 @@ export default class TimerComponent extends Vue {
         this.time = 0;
     }
 
-    private toggleDNF(): void {
-
+    private toggleDNF(solve: SolveLog): void {
+        solve.dnf = !solve.dnf;
     }
 
 }
