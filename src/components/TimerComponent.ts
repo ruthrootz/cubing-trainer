@@ -50,6 +50,9 @@ export default class TimerComponent extends Vue {
                 this.clearTimer();
             }
         });
+        window.onkeydown = function(e) { 
+            return !(e.keyCode == 32 && e.target == document.body);
+        };
         this.$notify({
             group: 'notifications',
             text: 'Use SPACEBAR to start/stop timer. Use ESC to clear the timer.',
