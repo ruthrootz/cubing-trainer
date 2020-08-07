@@ -1,7 +1,10 @@
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import WithRender from './timer-component.html';
 import { SolveLog } from '@/models/SolveLog';
+import { saveAs } from 'file-saver';
 const cubeScrambler = require('cube-scrambler')();
+const json2csv = require('json-2-csv');
+const csv2json = require('csvtojson');
 require('../styles/timer-component.css');
 
 @WithRender
@@ -42,14 +45,14 @@ export default class TimerComponent extends Vue {
     }
 
     private mounted(): void {
-        window.addEventListener('keyup', (e: KeyboardEvent): void => {
+        window.onkeyup = (e: KeyboardEvent): void => {
             if (e.keyCode === 32) {
                 this.timerTrigger();
             }
             if (e.keyCode === 27) {
                 this.clearTimer();
             }
-        });
+        };
         window.onkeydown = (e: KeyboardEvent): boolean => {
             return !(e.keyCode === 32 && e.target === document.body);
         };
@@ -95,6 +98,33 @@ export default class TimerComponent extends Vue {
 
     private toggleDNF(solve: SolveLog): void {
         solve.dnf = !solve.dnf;
+    }
+
+    private exportSolves(): void {
+        json2csv.json2csv(this.solves, (err, csv) => {
+            if (err) {
+                console.error(err);
+            }
+            const blob = new Blob([csv], {
+                type: 'data:text/csv;charset=utf-8'
+            });
+            saveAs(blob, 'solves.csv');
+        });
+    }
+
+    private openSolves(): void {
+        let fileSelector = document.getElementById('file-input');
+        fileSelector.click();
+    }
+
+    private async importSolves(e: Event): Promise<void> {
+        const filePath = (e.target as HTMLInputElement).files[0];
+        try {
+            this.solves = await csv2json().fromFile(filePath);
+        }
+        catch(error) {
+            console.error(error);
+        }
     }
 
 }
