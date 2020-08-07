@@ -1,4 +1,4 @@
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import WithRender from './timer-component.html';
 import { SolveLog } from '@/models/SolveLog';
 const cubeScrambler = require('cube-scrambler')();
@@ -42,17 +42,28 @@ export default class TimerComponent extends Vue {
     }
 
     private mounted(): void {
-        window.addEventListener('keyup', (e: KeyboardEvent): void => {
+        window.onkeyup = (e: KeyboardEvent): void => {
             if (e.keyCode === 32) {
                 this.timerTrigger();
             }
             if (e.keyCode === 27) {
                 this.clearTimer();
             }
-        });
+        };
         window.onkeydown = (e: KeyboardEvent): boolean => {
             return !(e.keyCode === 32 && e.target === document.body);
         };
+        // window.ontouchend = (e: TouchEvent): void => {
+        //     let touchingNotification: boolean = false;
+        //     for (let i: number = 0; i < e.targetTouches.length; i++) {
+        //         if ((e.touches[i].target as HTMLElement).classList.contains('vue-notification-group')) {
+        //             touchingNotification = true;
+        //         }
+        //     }
+        //     if (!touchingNotification) {
+        //         this.timerTrigger();
+        //     }
+        // };
         window.onload = () => { 
             this.$notify({
                 group: 'notifications',
