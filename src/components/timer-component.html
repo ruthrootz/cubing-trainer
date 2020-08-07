@@ -1,13 +1,17 @@
-<div v-touch:end="timerTrigger">
-    <p class="scramble">{{ scramble }}</p>
-    <h1 class="timer">{{ time.toFixed(2) }}</h1>
-    <p class="average">session average: {{ sessionAverage === 0.00 ? '--' : sessionAverage.toFixed(2) }}</p>
-    <div class="times">
-        <b-table bordered dark responsive :fields="fields" :items="solves">
-            <template v-slot:cell(dnf)="data">
-                <b v-show="data.item.dnf" @click="toggleDNF(data.item)"><i class="fas fa-times-circle"></i></b>
-                <b v-show="!data.item.dnf" @click="toggleDNF(data.item)"><i class="far fa-times-circle"></i></b>
-            </template>
-        </b-table>
+<div>
+    <div v-touch:end="timerTrigger">
+        <p class="scramble">{{ scramble }}</p>
+        <h1 class="timer">{{ time.toFixed(2) }}</h1>
+        <p class="average">session average: {{ sessionAverage === 0.00 ? '--' : sessionAverage.toFixed(2) }}</p>
+        <div class="times">
+            <b-table bordered dark responsive :fields="fields" :items="solves">
+                <template v-slot:cell(dnf)="data">
+                    <b v-show="data.item.dnf" @click="toggleDNF(data.item)"><i class="fas fa-times-circle"></i></b>
+                    <b v-show="!data.item.dnf" @click="toggleDNF(data.item)"><i class="far fa-times-circle"></i></b>
+                </template>
+            </b-table>
+        </div>
     </div>
+    <b-button @click="exportSolves">export solves to CSV</b-button> <b-button @click="openSolves">import solves from CSV</b-button>
+    <input type="file" id="file-input" style="display:none" @change="importSolves" />
 </div>
