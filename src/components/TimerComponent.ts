@@ -3,8 +3,7 @@ import WithRender from './timer-component.html';
 import { SolveLog } from '@/models/SolveLog';
 import { saveAs } from 'file-saver';
 const cubeScrambler = require('cube-scrambler')();
-const json2csv = require('json-2-csv');
-const csv2json = require('csvtojson');
+const papa = require('papaparse'); 
 require('../styles/timer-component.css');
 
 @WithRender
@@ -26,7 +25,7 @@ export default class TimerComponent extends Vue {
         {
             id: 0,
             sessionId: 0,
-            userId: null,
+            userId: 0,
             time: 45.0,
             dnf: true,
         },
@@ -73,7 +72,7 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            this.solves.push(new SolveLog(this.solveNumber++, 0, null, Math.round(this.time * 1000) / 1000, false));
+            this.solves.push(new SolveLog({ id: this.solveNumber++, sessionId: 0, userId: null, time: Math.round(this.time * 1000) / 1000, dnf: false }));
             this.scramble = cubeScrambler.scramble().toString().split(',').join(' ');
         } else {
             this.timerRunning = true;
@@ -101,15 +100,11 @@ export default class TimerComponent extends Vue {
     }
 
     private exportSolves(): void {
-        json2csv.json2csv(this.solves, (err, csv) => {
-            if (err) {
-                console.error(err);
-            }
-            const blob = new Blob([csv], {
-                type: 'data:text/csv;charset=utf-8'
-            });
-            saveAs(blob, 'solves.csv');
+        const csvData = papa.unparse(this.solves);
+        const blob = new Blob([csvData], {
+            type: 'data:text/csv;charset=utf-8'
         });
+        saveAs(blob, 'solves.csv');
     }
 
     private openSolves(): void {
@@ -118,9 +113,15 @@ export default class TimerComponent extends Vue {
     }
 
     private async importSolves(e: Event): Promise<void> {
-        const filePath = (e.target as HTMLInputElement).files[0];
+        const file: File = (e.target as HTMLInputElement).files[0];
         try {
-            this.solves = await csv2json().fromFile(filePath);
+            papa.parse(file, {
+                header: true,
+                dynamicTyping: true,
+                complete: (results: any): void => {
+                    this.solves = results.data.map((s: any): SolveLog => new SolveLog(s));
+                }
+            });
         }
         catch(error) {
             console.error(error);

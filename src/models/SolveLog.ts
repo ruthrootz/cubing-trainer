@@ -3,13 +3,13 @@ export class SolveLog {
     public sessionId: number;
     public userId: number | null;
     public time: number;
-    public dnf: boolean;
+    public dnf: boolean | string;
 
-    constructor(id: number, sessionId: number, userId: number | null, time: number, dnf: boolean) {
-        this.id = id;
-        this.sessionId = sessionId;
-        this.userId = userId;
-        this.time = time;
-        this.dnf = dnf;
+    constructor(solve: Partial<SolveLog> ) {
+        this.id = Number(solve.id);
+        this.sessionId = Number(solve.sessionId);
+        this.userId = Number(solve.userId);
+        this.time = Number(solve.time);
+        this.dnf = Boolean(solve.dnf);
     }
 }
