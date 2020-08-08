@@ -16,6 +16,7 @@
     "file-saver": "^2.0.2",
     "jquery": "^3.5.0",
     "json-2-csv": "^3.7.6",
+    "papaparse": "^5.2.0",
     "rubiks-cube-scramble": "^1.0.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.0.2",

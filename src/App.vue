@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
-    <div id="nav">
+    <h1 id="nav">cubing trainer</h1>
+    <!-- <div id="nav">
       <router-link to="/">Timer</router-link> |
       <router-link to="/algorithms">Algorithms</router-link>
-    </div>
+    </div> -->
     <router-view/>
     <notifications group="notifications" />
   </div>
