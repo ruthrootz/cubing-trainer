@@ -11,17 +11,23 @@
 
 .timer {
     font-size: 3em;
-    padding: 3%;
+    padding: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+@media (max-width:600px) {
+    .timer {
+        font-size: 2em;
+    }
 }
 
 .chart {
-    width: 75%;
     margin: 0 auto;
 }
 
 .times {
-    font-size: 0.4em;
-    width: 75%;
+    font-size: 0.3em;
     margin: 0 auto;
 }
 
