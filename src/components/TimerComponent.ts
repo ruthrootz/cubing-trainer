@@ -1,11 +1,11 @@
 import { Component, Vue } from 'vue-property-decorator';
-import WithRender from './timer-component.html';
 import { SolveLog } from '@/models/SolveLog';
 import { saveAs } from 'file-saver';
-import _ from 'lodash';
+import WithRender from './timer-component.html';
 import Chart from 'chart.js';
+import _ from 'lodash';
 const cubeScrambler = require('cube-scrambler')();
-const papa = require('papaparse'); 
+const papa = require('papaparse');
 require('../styles/timer-component.css');
 
 @WithRender
@@ -25,15 +25,7 @@ export default class TimerComponent extends Vue {
         { key: 'dnf', label: 'DNF' },
     ];
 
-    private solves: SolveLog[] = [
-        {
-            // sessionId: 0,
-            // userId: 0,
-            id: 0,
-            time: 45.0,
-            dnf: true,
-        },
-    ];
+    private solves: SolveLog[] = [];
 
     private get sessionAverage(): number {
         let sum: number = 0;
@@ -59,7 +51,7 @@ export default class TimerComponent extends Vue {
         window.onkeydown = (e: KeyboardEvent): boolean => {
             return !(e.keyCode === 32 && e.target === document.body);
         };
-        window.onload = () => { 
+        window.onload = () => {
             this.$notify({
                 group: 'notifications',
                 text: 'Use SPACEBAR to start/stop timer. Use ESC to clear the timer.',
@@ -70,8 +62,8 @@ export default class TimerComponent extends Vue {
                 text: 'Click on the X in the DNF box to toggle DNF status.',
                 duration: -1,
             });
-        }
-        let ctx = document.getElementById('solvesChart');
+        };
+        const ctx: HTMLElement = document.getElementById('solvesChart');
         this.solvesChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -86,26 +78,27 @@ export default class TimerComponent extends Vue {
                     borderColor: [
                         'rgb(15, 220, 121)',
                     ],
-                    borderWidth: 1
-                }]
+                    borderWidth: 1,
+                }],
             },
             options: {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
+                            beginAtZero: true,
+                        },
+                    }],
+                },
+            },
         });
     }
 
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            let currentTime: number = Math.round(this.time * 1000) / 1000;
-            if (_.minBy(this.solves.filter((s: SolveLog): boolean => !s.dnf), 'time').time > currentTime) {
+            const currentTime: number = Math.round(this.time * 1000) / 1000;
+            const currentBest: SolveLog | null = _.minBy(this.solves.filter((s: SolveLog): boolean => !s.dnf), 'time');
+            if (currentBest ? currentBest.time > currentTime : true) {
                 this.bestTime = true;
             }
             this.solves.unshift(new SolveLog({ id: this.solveNumber, time: currentTime, dnf: false }));
@@ -140,15 +133,15 @@ export default class TimerComponent extends Vue {
     }
 
     private exportSolves(): void {
-        const csvData = papa.unparse(this.solves);
-        const blob = new Blob([csvData], {
-            type: 'data:text/csv;charset=utf-8'
+        const csvData: any = papa.unparse(this.solves);
+        const blob: Blob = new Blob([csvData], {
+            type: 'data:text/csv;charset=utf-8',
         });
         saveAs(blob, 'solves.csv');
     }
 
     private openSolves(): void {
-        let fileSelector = document.getElementById('file-input');
+        const fileSelector: HTMLElement = document.getElementById('file-input');
         fileSelector.click();
     }
 
@@ -161,18 +154,23 @@ export default class TimerComponent extends Vue {
                 complete: (results: any): void => {
                     this.solves = results.data.map((s: any): SolveLog => new SolveLog(s));
                     this.updateChart();
-                }
+                },
             });
-        }
-        catch(error) {
+        } catch (error) {
             console.error(error);
         }
     }
 
     private updateChart(): void {
-        this.solvesChart.data.labels = this.solves.filter((s: SolveLog): boolean => !s.dnf).map((s: SolveLog): number => s.id).reverse();
+        this.solvesChart.data.labels = this.solves
+            .filter((s: SolveLog): boolean => !s.dnf)
+                .map((s: SolveLog): number => s.id)
+                    .reverse();
         this.solvesChart.data.datasets.forEach((dataset) => {
-            dataset.data = this.solves.filter((s: SolveLog): boolean => !s.dnf).map((s: SolveLog): number => s.time).reverse();
+            dataset.data = this.solves
+            .filter((s: SolveLog): boolean => !s.dnf)
+                .map((s: SolveLog): number => s.time)
+                    .reverse();
         });
         this.solvesChart.update();
     }

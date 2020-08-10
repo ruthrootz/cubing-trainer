@@ -26,7 +26,8 @@
 }
 
 #nav {
-  padding: 30px;
+  padding: 10px;
+  color: rgb(15, 220, 121);
 }
 
 #nav a {
