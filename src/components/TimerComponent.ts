@@ -160,6 +160,7 @@ export default class TimerComponent extends Vue {
                 dynamicTyping: true,
                 complete: (results: any): void => {
                     this.solves = results.data.map((s: any): SolveLog => new SolveLog(s));
+                    this.updateChart();
                 }
             });
         }
