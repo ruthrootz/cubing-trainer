@@ -81,10 +81,10 @@ export default class TimerComponent extends Vue {
                     label: 'solve time',
                     data: this.solves.map((s: SolveLog): number => !s.dnf ? s.time : null),
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(15, 220, 121, 0.2)',
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
+                        'rgb(15, 220, 121)',
                     ],
                     borderWidth: 1
                 }]
@@ -105,7 +105,7 @@ export default class TimerComponent extends Vue {
         if (this.timerRunning) {
             this.timerRunning = false;
             let currentTime: number = Math.round(this.time * 1000) / 1000;
-            if (_.minBy(this.solves, 'time').time > currentTime) {
+            if (_.minBy(this.solves.filter((s: SolveLog): boolean => !s.dnf), 'time').time > currentTime) {
                 this.bestTime = true;
             }
             this.solves.unshift(new SolveLog({ id: this.solveNumber, time: currentTime, dnf: false }));
