@@ -23,9 +23,9 @@ export default class TimerComponent extends Vue {
 
     private solves: SolveLog[] = [
         {
+            // sessionId: 0,
+            // userId: 0,
             id: 0,
-            sessionId: 0,
-            userId: 0,
             time: 45.0,
             dnf: true,
         },
@@ -72,7 +72,7 @@ export default class TimerComponent extends Vue {
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            this.solves.push(new SolveLog({ id: this.solveNumber++, sessionId: 0, userId: null, time: Math.round(this.time * 1000) / 1000, dnf: false }));
+            this.solves.unshift(new SolveLog({ id: this.solveNumber++, time: Math.round(this.time * 1000) / 1000, dnf: false }));
             this.scramble = cubeScrambler.scramble().toString().split(',').join(' ');
         } else {
             this.timerRunning = true;
