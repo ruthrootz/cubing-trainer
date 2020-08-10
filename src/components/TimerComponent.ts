@@ -2,6 +2,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import WithRender from './timer-component.html';
 import { SolveLog } from '@/models/SolveLog';
 import { saveAs } from 'file-saver';
+import _ from 'lodash';
+import Chart from 'chart.js';
 const cubeScrambler = require('cube-scrambler')();
 const papa = require('papaparse'); 
 require('../styles/timer-component.css');
@@ -12,8 +14,10 @@ export default class TimerComponent extends Vue {
 
     private time: number = 0;
     private timerRunning: boolean = false;
-    private solveNumber: number = 1;
+    private bestTime: boolean = false;
+    private solveNumber: number = 0;
     private scramble: string = cubeScrambler.scramble().toString().split(',').join(' ');
+    private solvesChart: Chart;
 
     private fields: any[] = [
         { key: 'id', label: 'Solve Id' },
@@ -67,15 +71,50 @@ export default class TimerComponent extends Vue {
                 duration: -1,
             });
         }
+        let ctx = document.getElementById('solvesChart');
+        this.solvesChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    type: 'line',
+                    label: 'solve time',
+                    data: this.solves.map((s: SolveLog): number => !s.dnf ? s.time : null),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
     }
 
     private timerTrigger(): void {
         if (this.timerRunning) {
             this.timerRunning = false;
-            this.solves.unshift(new SolveLog({ id: this.solveNumber++, time: Math.round(this.time * 1000) / 1000, dnf: false }));
+            let currentTime: number = Math.round(this.time * 1000) / 1000;
+            if (_.minBy(this.solves, 'time').time > currentTime) {
+                this.bestTime = true;
+            }
+            this.solves.unshift(new SolveLog({ id: this.solveNumber, time: currentTime, dnf: false }));
+            this.updateChart();
             this.scramble = cubeScrambler.scramble().toString().split(',').join(' ');
         } else {
             this.timerRunning = true;
+            this.bestTime = false;
+            this.solveNumber++;
             this.time = 0;
             this.tick();
         }
@@ -97,6 +136,7 @@ export default class TimerComponent extends Vue {
 
     private toggleDNF(solve: SolveLog): void {
         solve.dnf = !solve.dnf;
+        this.updateChart();
     }
 
     private exportSolves(): void {
@@ -126,6 +166,14 @@ export default class TimerComponent extends Vue {
         catch(error) {
             console.error(error);
         }
+    }
+
+    private updateChart(): void {
+        this.solvesChart.data.labels = this.solves.filter((s: SolveLog): boolean => !s.dnf).map((s: SolveLog): number => s.id).reverse();
+        this.solvesChart.data.datasets.forEach((dataset) => {
+            dataset.data = this.solves.filter((s: SolveLog): boolean => !s.dnf).map((s: SolveLog): number => s.time).reverse();
+        });
+        this.solvesChart.update();
     }
 
 }

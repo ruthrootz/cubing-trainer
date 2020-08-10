@@ -1,8 +1,11 @@
 <div>
     <div v-touch:end="timerTrigger">
         <p class="scramble">{{ scramble }}</p>
-        <h1 class="timer">{{ time.toFixed(2) }}</h1>
+        <h1 :class="{ timer: true, bestTime: bestTime }">{{ time.toFixed(2) }}</h1>
         <p class="average">session average: {{ sessionAverage === 0.00 ? '--' : sessionAverage.toFixed(2) }}</p>
+    </div>
+    <div class="chart">
+        <canvas id="solvesChart"></canvas>
     </div>
     <div class="times">
         <b-table bordered dark responsive fixed :fields="fields" :items="solves">
