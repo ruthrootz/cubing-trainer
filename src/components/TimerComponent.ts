@@ -13,6 +13,7 @@ require('../styles/timer-component.css');
 export default class TimerComponent extends Vue {
 
     private time: number = 0;
+    private timeStart: number;
     private timerRunning: boolean = false;
     private bestTime: boolean = false;
     private solveNumber: number = 0;
@@ -108,6 +109,7 @@ export default class TimerComponent extends Vue {
             this.timerRunning = true;
             this.bestTime = false;
             this.solveNumber++;
+            this.timeStart = Date.now();
             this.time = 0;
             this.tick();
         }
@@ -116,17 +118,11 @@ export default class TimerComponent extends Vue {
     private tick(): void {
         setTimeout( () => {
             if (this.timerRunning) {
+                let delta = Date.now() - this.timeStart;
+                this.time = Math.floor(delta / 10) / 100;
                 this.tick();
             }
-            this.time += 0.01;
-        }, 10 );
-        // var start = Date.now();
-        // setInterval(function() {
-        //     var delta = Date.now() - start; // milliseconds elapsed since start
-        //     output(Math.floor(delta / 1000)); // in seconds
-        //     // alternatively just show wall clock time:
-        //     output(new Date().toUTCString());
-        // }, 1000); // update about every second
+        }, 10);
     }
 
     private clearTimer(): void {
@@ -180,6 +176,12 @@ export default class TimerComponent extends Vue {
                     .reverse();
         });
         this.solvesChart.update();
+    }
+
+    private plusTwoClick(solve: SolveLog): void {
+        solve.time += 2;
+        solve.isPlusTwo = true;
+        this.updateChart();
     }
 
 }
