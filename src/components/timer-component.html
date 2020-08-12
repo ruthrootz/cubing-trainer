@@ -11,7 +11,7 @@
     <div class="times">
         <b-table bordered dark responsive fixed :fields="fields" :items="solves">
             <template v-slot:cell(time)="data">
-                <div @mouseover="data.item.showPlusTwo = true" @mouseleave="data.item.showPlusTwo = false">{{ data.item.time.toFixed(2) }} <b @click="data.item.time += 2"><span class="plusTwo" v-show="data.item.showPlusTwo">+2</span></b></div>
+                <div @mouseover="data.item.showPlusTwo = true" @mouseleave="data.item.showPlusTwo = false">{{ data.item.time.toFixed(2) }} <b v-if="!data.item.isPlusTwo" @click="data.item.time += 2; data.item.isPlusTwo = true"><span class="plusTwo" v-show="data.item.showPlusTwo">+2</span></b></div>
             </template>
             <template v-slot:cell(dnf)="data">
                 <b v-show="data.item.dnf" @click="toggleDNF(data.item)"><i class="fas fa-times-circle"></i></b>

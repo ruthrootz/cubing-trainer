@@ -3,6 +3,7 @@ export class SolveLog {
     public time: number;
     public dnf: boolean | string;
     public showPlusTwo: boolean = false;
+    public isPlusTwo: boolean = false;
     // public sessionId: number;
     // public userId: number | null;
 
@@ -11,6 +12,7 @@ export class SolveLog {
         this.time = Number(solve.time);
         this.dnf = Boolean(solve.dnf);
         this.showPlusTwo = Boolean(solve.showPlusTwo);
+        this.isPlusTwo = Boolean(solve.isPlusTwo);
         // this.sessionId = Number(solve.sessionId);
         // this.userId = Number(solve.userId);
     }
