@@ -52,18 +52,6 @@ export default class TimerComponent extends Vue {
         window.onkeydown = (e: KeyboardEvent): boolean => {
             return !(e.keyCode === 32 && e.target === document.body);
         };
-        window.onload = () => {
-            this.$notify({
-                group: 'notifications',
-                text: 'Use SPACEBAR to start/stop timer. Use ESC to clear the timer.',
-                duration: -1,
-            });
-            this.$notify({
-                group: 'notifications',
-                text: 'Click on the X in the DNF box to toggle DNF status.',
-                duration: -1,
-            });
-        };
         const ctx: HTMLElement = document.getElementById('solvesChart');
         this.solvesChart = new Chart(ctx, {
             type: 'line',
