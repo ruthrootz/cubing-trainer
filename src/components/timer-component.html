@@ -24,6 +24,6 @@
             </div>
         </b-col>
     </b-row>
-    <b-button @click="exportSolves">export solves to CSV</b-button> <b-button @click="openSolves">import solves from CSV</b-button>
+    <b-button @click="exportSolves" onclick="this.blur()">export solves to CSV</b-button> <b-button @click="openSolves" onclick="this.blur()">import solves from CSV</b-button>
     <input type="file" id="file-input" style="display:none" @change="importSolves" />
 </div>
