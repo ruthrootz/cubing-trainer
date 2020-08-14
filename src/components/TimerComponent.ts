@@ -106,7 +106,7 @@ export default class TimerComponent extends Vue {
     private tick(): void {
         setTimeout( () => {
             if (this.timerRunning) {
-                let delta = Date.now() - this.timeStart;
+                const delta = Date.now() - this.timeStart;
                 this.time = Math.floor(delta / 10) / 100;
                 this.tick();
             }
