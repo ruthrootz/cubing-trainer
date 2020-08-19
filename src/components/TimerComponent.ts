@@ -70,15 +70,6 @@ export default class TimerComponent extends Vue {
                     borderWidth: 1,
                 }],
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                        },
-                    }],
-                },
-            },
         });
     }
 
