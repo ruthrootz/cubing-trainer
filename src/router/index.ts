@@ -6,20 +6,20 @@ import Timer from '../views/Timer.vue';
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'timer',
-    component: Timer,
-  },
-  {
-    path: '/algorithms',
-    name: 'algorithms',
-    component: Algorithms,
-  },
+    {
+        path: '/',
+        name: 'timer',
+        component: Timer,
+    },
+    {
+        path: '/algorithms',
+        name: 'algorithms',
+        component: Algorithms,
+    },
 ];
 
 const router = new VueRouter({
-  routes,
+    routes,
 });
 
 export default router;
