@@ -1,7 +1,7 @@
 <template>
-  <div class="algorithms">
-    <AlgorithmsComponent/>
-  </div>
+    <div class="algorithms">
+        <AlgorithmsComponent/>
+    </div>
 </template>
 
 <script>
@@ -9,9 +9,9 @@
 import AlgorithmsComponent from '@/components/AlgorithmsComponent.ts';
 
 export default {
-  name: 'algorithms-component',
-  components: {
-    AlgorithmsComponent,
-  },
+    name: 'algorithms-component',
+    components: {
+        AlgorithmsComponent,
+    },
 };
 </script>
