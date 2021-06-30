@@ -1,7 +1,7 @@
 <template>
-  <div class="timer">
-    <TimerComponent/>
-  </div>
+    <div class="timer">
+        <TimerComponent/>
+    </div>
 </template>
 
 <script>
@@ -9,9 +9,9 @@
 import TimerComponent from '@/components/TimerComponent.ts';
 
 export default {
-  name: 'timer-component',
-  components: {
-    TimerComponent,
-  },
+    name: 'timer-component',
+    components: {
+        TimerComponent,
+    },
 };
 </script>
