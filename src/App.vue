@@ -3,6 +3,7 @@
     <link href="https://fonts.googleapis.com/css?family=Space+Mono&display=swap" rel="stylesheet">
     <h1 id="nav">cubing trainer <span id="info"><i class="fas fa-info-circle"></i></span></h1>
     <b-popover target="info" triggers="hover" placement="bottom">
+      <p class="popover-text">The scrambles are for 3x3 cubes.</p>
       <p class="popover-text">Use SPACEBAR to start/stop timer. Use ESC to clear the timer.</p>
       <p class="popover-text">Click on the X in the DNF cell to toggle DNF status.</p>
       <p class="popover-text">Hover (or touch on mobile) on time cell to +2.</p>
