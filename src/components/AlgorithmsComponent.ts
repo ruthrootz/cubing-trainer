@@ -1,5 +1,5 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import WithRender from './algorithms-component.html';
+import WithRender from './AlgorithmsComponent.html';
 import AlgorithmComponent from './AlgorithmComponent';
 
 @WithRender

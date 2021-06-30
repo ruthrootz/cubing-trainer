@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { SolveLog } from '@/models/SolveLog';
 import { saveAs } from 'file-saver';
-import WithRender from './timer-component.html';
+import WithRender from './TimerComponent.html';
 import Chart from 'chart.js';
 import _ from 'lodash';
 const cubeScrambler = require('cube-scrambler')();
