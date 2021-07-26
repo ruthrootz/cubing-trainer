@@ -4,9 +4,9 @@
         <h1 id="nav">cubing trainer <span id="info"><i class="fas fa-info-circle"></i></span></h1>
         <b-popover target="info" triggers="hover" placement="bottom">
             <p class="popover-text">The scrambles are for 3x3 cubes.</p>
-            <p class="popover-text">Use SPACEBAR to start/stop timer. Use ESC to clear the timer.</p>
-            <p class="popover-text">Click on the X in the DNF cell to toggle DNF status.</p>
-            <p class="popover-text">Hover (or touch on mobile) on time cell to +2.</p>
+            <p class="popover-text">Use SPACEBAR to start/stop the timer. Use ESC to clear the timer.</p>
+            <p class="popover-text">Click on the X in a solve's DNF cell to toggle the DNF status.</p>
+            <p class="popover-text">Hover on (or touch on mobile) a solve's time cell to +2.</p>
             <p class="popover-text">created by: <a href="https://rutholdja.netlify.app/">Ruth O.</a></p>
         </b-popover>
         <!-- <div id="nav">
